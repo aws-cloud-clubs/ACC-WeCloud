@@ -38,11 +38,23 @@ public class Wish extends BaseTimeEntity {
     private User user;
 
     @Builder
-    public Wish(String title, String content, String image, LocalDateTime deadline, Long targetAmount) {
+    public Wish(String title, String content, String image, LocalDateTime deadline, Long targetAmount, User user) {
         this.title = title;
         this.content = content;
         this.image = image;
         this.deadline = deadline;
         this.targetAmount = targetAmount;
+        this.user = user;
+    }
+
+    public void update(String title, String content, String image, Long targetAmount) {
+        this.title = title;
+        this.content = content;
+        this.image = image;
+        this.targetAmount = targetAmount;
+    }
+
+    public void delete() {
+        this.isDeleted = true;
     }
 }
