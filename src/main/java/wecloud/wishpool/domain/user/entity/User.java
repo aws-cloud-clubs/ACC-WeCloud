@@ -1,15 +1,13 @@
 package wecloud.wishpool.domain.user.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import wecloud.wishpool.domain.funding.entity.Funding;
 import wecloud.wishpool.domain.reviewComment.entity.ReviewComment;
 import wecloud.wishpool.domain.wish.entity.Wish;
 import wecloud.wishpool.global.auditing.BaseTimeEntity;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -25,7 +23,7 @@ public class User extends BaseTimeEntity {
     private String name;
     private String email;
     private String password;
-    private Date birth;
+    private LocalDate birth;
     private boolean isDeleted;
 
     @OneToMany(mappedBy = "user")
@@ -36,5 +34,13 @@ public class User extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "user")
     private List<ReviewComment> reviewComments;
+
+    @Builder
+    public User(String name, String email, String password, LocalDate birth) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.birth = birth;
+    }
 
 }
