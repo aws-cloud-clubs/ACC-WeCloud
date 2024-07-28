@@ -27,8 +27,8 @@ public class Wish extends BaseTimeEntity {
     private Long currentAmount;
     private boolean isDeleted;
 
-    @OneToOne(mappedBy = "wish")
-    private Review review;
+//    @OneToOne(mappedBy = "wish", fetch = FetchType.LAZY)
+//    private Review review;
 
     @OneToMany(mappedBy = "wish")
     private List<Funding> fundings;
