@@ -28,6 +28,11 @@ public class ApiResponse<T> {
         return new ApiResponse<>(true, StatusEnum.CREATED, data, message);
     }
 
+    // 예외 발생으로 API 호출 실패시 반환
+    public static ApiResponse<?> response400Error(String message) {
+        return new ApiResponse<>(false, StatusEnum.BAD_REQUEST, null, message);
+    }
+
     @Builder
     private ApiResponse(boolean isSuccess, StatusEnum status, T data, String message) {
         this.isSuccess = isSuccess;
