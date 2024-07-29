@@ -11,7 +11,6 @@ import wecloud.wishpool.domain.user.dto.request.UserDoFundingResponseDto;
 import wecloud.wishpool.domain.wish.dto.request.WishSaveRequestDto;
 import wecloud.wishpool.domain.wish.dto.request.WishUpdateRequestDto;
 import wecloud.wishpool.domain.wish.dto.response.WishGetOneResponseDto;
-import wecloud.wishpool.domain.wish.entity.Wish;
 import wecloud.wishpool.domain.wish.service.WishService;
 import wecloud.wishpool.global.aws.service.S3Service;
 import wecloud.wishpool.global.response.ApiResponse;
