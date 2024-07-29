@@ -2,14 +2,11 @@ package wecloud.wishpool.domain.wish.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.tags.Tags;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import wecloud.wishpool.domain.wish.dto.request.WishSaveRequestDto;
 import wecloud.wishpool.domain.wish.dto.request.WishUpdateRequestDto;
 import wecloud.wishpool.domain.wish.dto.response.WishGetOneResponseDto;
-import wecloud.wishpool.domain.wish.entity.Wish;
 import wecloud.wishpool.domain.wish.service.WishService;
 import wecloud.wishpool.global.response.ApiResponse;
 
@@ -48,4 +45,17 @@ public class WishController {
 
 
 
+    @PostMapping("/{wishId}/close")
+    @Operation(summary = "(알림용🔔/상태변경) 소원 피드 종료", description = "소원 피드를 종료합니다.")
+    public ApiResponse<?> closeWish(@PathVariable Long wishId) {
+        wishService.closeWish(wishId);
+        return ApiResponse.responseSuccess("소원 피드 종료");
+    }
+
+    @PostMapping("/{wishId}/complete")
+    @Operation(summary = "(알림용🔔/상태변경) 소원 펀딩 달성 완료", description = "소원 펀딩을 완료합니다.")
+    public ApiResponse<?> completeWish(@PathVariable Long wishId) {
+        wishService.completeWish(wishId);
+        return ApiResponse.responseSuccess("소원 펀딩 달성 완료");
+    }
 }

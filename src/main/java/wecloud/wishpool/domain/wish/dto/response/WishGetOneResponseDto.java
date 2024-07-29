@@ -14,4 +14,6 @@ public class WishGetOneResponseDto {
     private LocalDateTime deadline;
     private Long targetAmount;
     private Long currentAmount;
+    private boolean isCompleted;
+    private boolean isEnded;
 }
