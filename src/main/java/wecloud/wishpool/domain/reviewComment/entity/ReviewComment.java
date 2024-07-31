@@ -1,10 +1,7 @@
 package wecloud.wishpool.domain.reviewComment.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import wecloud.wishpool.domain.review.entity.Review;
 import wecloud.wishpool.domain.user.entity.User;
 import wecloud.wishpool.global.auditing.BaseTimeEntity;
@@ -27,4 +24,11 @@ public class ReviewComment extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @Builder
+    public ReviewComment(String content, Review review, User user) {
+        this.content = content;
+        this.review = review;
+        this.user = user;
+    }
 }

@@ -9,6 +9,8 @@ import wecloud.wishpool.domain.funding.dto.response.FundingGetOneResponseDto;
 import wecloud.wishpool.domain.funding.service.FundingService;
 import wecloud.wishpool.global.response.ApiResponse;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/wishes/{wishId}/fundings")
@@ -27,5 +29,13 @@ public class FundingController {
     public ApiResponse<FundingGetOneResponseDto> getFunding(@PathVariable Long fundingId,@PathVariable Long wishId, @RequestParam Long userId) {
         FundingGetOneResponseDto fundingDto = fundingService.findFunding(fundingId,userId,wishId);
         return ApiResponse.responseSuccess(fundingDto, "펀딩 조회 완료");
+    }
+
+    // TODO: 2024-07-29 페이지처리
+    @GetMapping
+    @Operation(summary = "펀딩 기록 조회", description = "펀딩기록을 조회합니다.")
+    public ApiResponse<List<FundingGetOneResponseDto>> getFundings(@PathVariable Long wishId) {
+        List<FundingGetOneResponseDto> fundingList = fundingService.findFundings(wishId);
+        return ApiResponse.responseSuccess(fundingList, "펀딩 조회 완료");
     }
 }

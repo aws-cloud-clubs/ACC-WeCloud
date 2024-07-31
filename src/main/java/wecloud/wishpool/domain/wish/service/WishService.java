@@ -19,10 +19,11 @@ public class WishService {
     private final UserService userService;
 
     @Transactional
-    public Long createWish(Long userId, WishSaveRequestDto requestDto) {
+    public Wish createWish(Long userId, WishSaveRequestDto requestDto) {
         User findUser = userService.findByUserId(userId);
-        return wishRepository.save(toEntity(findUser,requestDto)).getId();
+        return wishRepository.save(toEntity(findUser, requestDto));
     }
+
 
     private Wish toEntity(User user,WishSaveRequestDto requestDto) {
         return Wish.builder()
