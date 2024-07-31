@@ -1,10 +1,7 @@
 package wecloud.wishpool.domain.funding.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import wecloud.wishpool.domain.user.entity.User;
 import wecloud.wishpool.domain.wish.entity.Wish;
 import wecloud.wishpool.global.auditing.BaseTimeEntity;
@@ -31,4 +28,12 @@ public class Funding extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @Builder
+    public Funding(Long amount, String message, Wish wish, User user) {
+        this.amount = amount;
+        this.message = message;
+        this.wish = wish;
+        this.user = user;
+    }
 }

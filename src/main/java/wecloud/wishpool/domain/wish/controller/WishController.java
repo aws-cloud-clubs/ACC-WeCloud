@@ -25,7 +25,7 @@ public class WishController {
     @GetMapping("/{wishId}")
     @Operation(summary = "소원 피드 조회", description = "소원 피드를 조회합니다.")
     public ApiResponse<WishGetOneResponseDto> getWish(@PathVariable Long wishId) {
-        WishGetOneResponseDto wishDto = wishService.findById(wishId);
+        WishGetOneResponseDto wishDto = wishService.findWish(wishId);
         return ApiResponse.responseSuccess(wishDto, "소원 피드 조회 완료");
     }
 

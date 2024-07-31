@@ -26,7 +26,7 @@ public class UserService {
                 .build();
     }
 
-    public User findById(Long userId) {
+    public User findByUserId(Long userId) {
         return userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다."));
     }
 }
