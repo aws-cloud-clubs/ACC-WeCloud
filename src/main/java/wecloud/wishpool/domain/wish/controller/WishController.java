@@ -49,7 +49,7 @@ public class WishController {
                 return (ApiResponse<Long>) ApiResponse.response400Error("파일 업로드 실패");
             }
         }
-        wish.updateImage(fileName);
+        wishService.updateImage(wish.getId(), fileName);
         return ApiResponse.response201Success(wish.getId(), "소원 피드 생성 완료");
     }
 

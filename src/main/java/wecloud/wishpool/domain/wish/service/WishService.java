@@ -29,7 +29,6 @@ public class WishService {
         return Wish.builder()
                 .title(requestDto.getTitle())
                 .content(requestDto.getContent())
-                .image(requestDto.getImage())
                 .deadline(requestDto.getDeadline())
                 .targetAmount(requestDto.getTargetAmount())
                 .user(user)
@@ -67,6 +66,10 @@ public class WishService {
     }
 
     public Wish findByWishId(Long wishId) {
+        return wishRepository.findByIdAndIsDeletedFalse(wishId).orElseThrow(() -> new IllegalArgumentException("해당 소원이 없습니다."));
+    }
+
+    public Wish findByWishIdForFunding(Long wishId) {
         Wish wish = wishRepository.findByIdAndIsDeletedFalse(wishId).orElseThrow(() -> new IllegalArgumentException("해당 소원이 없습니다."));
         if (wish.isCompleted()) {
             throw new IllegalArgumentException("펀딩이 완료된 소원입니다.");
@@ -92,5 +95,11 @@ public class WishService {
     public void completeWish(Long wishId) {
         Wish wish = findByWishId(wishId);
         wish.updateCompleted();
+    }
+
+    @Transactional
+    public void updateImage(Long id, String fileName) {
+        Wish wish = findByWishId(id);
+        wish.updateImage(fileName);
     }
 }

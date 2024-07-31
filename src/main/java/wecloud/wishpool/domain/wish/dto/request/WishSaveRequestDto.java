@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 public class WishSaveRequestDto {
     private String title;
     private String content;
-    private String image;
     private LocalDateTime deadline;
     private Long targetAmount;
 }

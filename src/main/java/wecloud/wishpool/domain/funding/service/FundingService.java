@@ -27,7 +27,7 @@ public class FundingService {
 
     @Transactional
     public Long createFunding(Long userId, Long wishId, FundingCreateRequestDto requestDto) {
-        Wish wish = wishService.findByWishId(wishId);
+        Wish wish = wishService.findByWishIdForFunding(wishId);
         User user = userService.findByUserId(userId);
         wish.addCurrentAmount(requestDto.getAmount());
         return fundingRepository.save(toEntity(user, wish, requestDto)).getId();
