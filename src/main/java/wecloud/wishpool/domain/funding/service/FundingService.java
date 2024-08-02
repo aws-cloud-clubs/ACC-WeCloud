@@ -7,6 +7,7 @@ import wecloud.wishpool.domain.funding.dto.request.FundingCreateRequestDto;
 import wecloud.wishpool.domain.funding.dto.response.FundingGetOneResponseDto;
 import wecloud.wishpool.domain.funding.entity.Funding;
 import wecloud.wishpool.domain.funding.repository.FundingRepository;
+import wecloud.wishpool.domain.sns.service.WishNotificationService;
 import wecloud.wishpool.domain.user.dto.request.UserDoFundingResponseDto;
 import wecloud.wishpool.domain.user.entity.User;
 import wecloud.wishpool.domain.user.service.UserService;
@@ -24,13 +25,21 @@ public class FundingService {
     private final FundingRepository fundingRepository;
     private final UserService userService;
     private final WishService wishService;
+    private final WishNotificationService wishNotificationService;
 
     @Transactional
     public Long createFunding(Long userId, Long wishId, FundingCreateRequestDto requestDto) {
         Wish wish = wishService.findByWishIdFunding(wishId);
         User user = userService.findByUserId(userId);
         wish.addCurrentAmount(requestDto.getAmount());
-        return fundingRepository.save(toEntity(user, wish, requestDto)).getId();
+       fundingRepository.save(toEntity(user, wish, requestDto));
+        if(wish.isCompleted()){
+            List<String> userFundingEmail = getUserFundingEmail(wishId);
+            userFundingEmail.add(wish.getUser().getEmail());
+
+            wishNotificationService.notifyParticipants(wish,userFundingEmail);
+        }
+        return wish.getId();
     }
 
     private Funding toEntity(User user, Wish wish, FundingCreateRequestDto requestDto) {

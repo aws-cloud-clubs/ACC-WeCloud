@@ -42,6 +42,7 @@ dependencies {
     // AWS java sdk
     implementation 'com.amazonaws:aws-java-sdk-s3:1.12.180'
     implementation 'com.amazonaws:aws-java-sdk-ses:1.12.429'
+    implementation 'software.amazon.awssdk:sns:2.20.39'
     implementation 'commons-io:commons-io:2.11.0'
 }
 
