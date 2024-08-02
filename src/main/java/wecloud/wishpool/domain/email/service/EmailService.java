@@ -5,6 +5,7 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClientBuilder;
 import com.amazonaws.services.simpleemail.model.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class EmailService {
 
     public EmailService(@Value("${cloud.aws.credentials.access-key}") String accessKey,
                         @Value("${cloud.aws.credentials.secret-key}") String secretKey,
-                        @Value("${cloud.aws.region.static}") String region) {
+                        @Value("${cloud.ses.region}") String region) {
         BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKey, secretKey);
 
         this.sesClient = AmazonSimpleEmailServiceClientBuilder.standard()

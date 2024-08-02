@@ -27,9 +27,9 @@ public class Wish extends BaseTimeEntity {
     @Column(nullable = false)
     private Long currentAmount = 0L;
     @Column(nullable = false)
-    private boolean isCompleted = false; ; // 펀딩상태
+    private boolean isCompleted = false;  // 펀딩상태
     @Column(nullable = false)
-    private boolean isEnded = false; ; // 마감여부
+    private boolean isEnded = false;  // 마감여부
     private boolean isDeleted;
 
 //    @OneToOne(mappedBy = "wish", fetch = FetchType.LAZY)

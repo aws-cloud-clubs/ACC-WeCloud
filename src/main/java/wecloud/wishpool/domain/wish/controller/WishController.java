@@ -30,7 +30,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WishController {
     private final WishService wishService;
-    private final WishNotificationService wishNotificationService;
     private final S3Service s3Service;
     private final FundingService fundingService;
 

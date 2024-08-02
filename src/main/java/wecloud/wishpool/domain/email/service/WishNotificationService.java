@@ -1,5 +1,6 @@
 package wecloud.wishpool.domain.email.service;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import wecloud.wishpool.domain.funding.service.FundingService;
 import wecloud.wishpool.domain.wish.repository.WishRepository;
@@ -8,6 +9,7 @@ import wecloud.wishpool.domain.wish.entity.Wish;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +22,9 @@ public class WishNotificationService {
     private final EmailService emailService;
 
     @Scheduled(fixedRate = 60000) // 1분마다 실행
+    @Transactional
     public void checkWishesAndNotify() {
-        List<Wish> completedWishes = wishRepository.findByIsCompletedTrueAndIsEndedTrue();
+        List<Wish> completedWishes = wishRepository.findByIsCompletedTrueOrIsEndedTrue();
 
         for (Wish wish : completedWishes) {
             notifyParticipants(wish);
