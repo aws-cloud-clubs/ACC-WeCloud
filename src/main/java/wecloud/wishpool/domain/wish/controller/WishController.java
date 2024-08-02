@@ -3,9 +3,12 @@ package wecloud.wishpool.domain.wish.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.SpringApplication;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import wecloud.wishpool.domain.email.service.EmailService;
+import wecloud.wishpool.domain.email.service.WishNotificationService;
 import wecloud.wishpool.domain.funding.service.FundingService;
 import wecloud.wishpool.domain.user.dto.request.UserDoFundingResponseDto;
 import wecloud.wishpool.domain.wish.dto.request.WishSaveRequestDto;
@@ -27,9 +30,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WishController {
     private final WishService wishService;
-
+    private final WishNotificationService wishNotificationService;
     private final S3Service s3Service;
-
     private final FundingService fundingService;
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -92,4 +94,6 @@ public class WishController {
         wishService.completeWish(wishId);
         return ApiResponse.responseSuccess("소원 펀딩 달성 완료");
     }
+
+
 }

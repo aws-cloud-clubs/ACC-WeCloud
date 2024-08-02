@@ -84,4 +84,5 @@ public class Wish extends BaseTimeEntity {
     public void updateCompleted() {
         this.isCompleted = true;
     }
+
 }

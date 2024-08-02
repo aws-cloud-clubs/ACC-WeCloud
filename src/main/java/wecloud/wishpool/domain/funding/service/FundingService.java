@@ -82,4 +82,10 @@ public class FundingService {
                 .collect(Collectors.toSet());
         return usersDto.stream().toList();
     }
+
+    public List<String> getUserFundingEmail(Long wishId){
+        List<Funding> byWishId = fundingRepository.findByWishId(wishId);
+        List<String> collect = byWishId.stream().map(funding -> funding.getUser().getEmail()).collect(Collectors.toList());
+        return collect;
+    }
 }
