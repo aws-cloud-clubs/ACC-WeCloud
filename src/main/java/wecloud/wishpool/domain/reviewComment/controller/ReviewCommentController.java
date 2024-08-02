@@ -37,5 +37,4 @@ public class ReviewCommentController {
         reviewCommentService.deleteComment(wishId, reviewId, commentId);
         return ApiResponse.responseSuccess("리뷰 댓글 삭제 완료");
     }
-
 }

@@ -37,4 +37,5 @@ public class ReviewController {
         ReviewGetResponseDto reviewDto = reviewService.findReview(reviewId, wishId);
         return ApiResponse.responseSuccess(reviewDto, "리뷰 조회 완료");
     }
+
 }
